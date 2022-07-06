@@ -2,15 +2,18 @@
   "name": "testing",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "node ./node_modules/.bin/jest --forceExit --maxWorkers=1 --detectOpenHandles",
-    "build": "webpack --mode=development",
-    "dev": "webpack serve"
+    "build": "webpack",
+    "start": "webpack serve"
   },
   "author": "Miko Velasco Ramirez",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.18.6",
+    "@babel/core": "^7.18.6",
+    "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^27.0.0",
