@@ -10,4 +10,7 @@ const validateInput = (text, isEmpty, isNumber) => {
     return !text || isEmpty || isNumber ? false : true;
 }
 
+const generateText = (name, age) => `${name} (${age} years old)`
+
 exports.validateInput = validateInput;
+exports.generateText = generateText;
