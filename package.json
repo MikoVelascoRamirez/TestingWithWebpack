@@ -2,6 +2,7 @@
   "name": "testing",
   "version": "1.0.0",
   "description": "",
+  "main": "app.js",
   "private": true,
   "scripts": {
     "test": "node ./node_modules/.bin/jest --forceExit --maxWorkers=1 --detectOpenHandles",
