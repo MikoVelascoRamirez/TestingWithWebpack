@@ -13,7 +13,10 @@ const validateInput = (text, isEmpty, isNumber) => {
 const generateText = (name, age) => `${name} (${age} years old)`
 
 const checkAndGenerate = (name, age) => {
-    if(!validateInput(name, false, false) || !validateInput(age, false, false)){
+    const nameIsEmpty = name.trim().length;
+    const ageIsEmpty = age.trim().length;
+
+    if(!validateInput(name, nameIsEmpty === 0, !isNaN(name)) || !validateInput(age, ageIsEmpty === 0, isNaN(age))){
         return false;
     }
     return generateText(name, age)
