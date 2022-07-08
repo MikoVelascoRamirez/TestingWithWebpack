@@ -1,9 +1,9 @@
 import "./src/styles.css";
 const {checkAndGenerate} = require("./src/util.js");
+const form = document.querySelector("#formPerson");
 
 const initApp = () => {
   //const button = document.querySelector("#addPerson");
-  const form = document.querySelector("#formPerson");
   form.addEventListener("submit", e => {
     e.preventDefault();
     addUser();
@@ -20,6 +20,7 @@ const addUser = () => {
   else {
     const newElement = createParragraph(newText);
     document.querySelector('#result').appendChild(newElement);
+    form.reset();
   }
 };
 

@@ -21,7 +21,7 @@ describe("Tests suite for utilites", () => {
     it("4. Testing Puppeteer", async () => {
         const browser = await puppeteer.launch({
             args: ['--window-size=1280,1024'],
-            headless: false,
+            headless: true,
             slowMo: 80
         });
         const page = await browser.newPage();
@@ -41,4 +41,9 @@ describe("Tests suite for utilites", () => {
         //await page.screenshot({path: 'example.png'})
         //await browser.close();
     }, 100000)
+
+    it("5. Throwing invalid input", () => {
+        const validateInput = checkAndGenerate("12323", "dsasda");
+        expect(validateInput).toBeFalsy();
+    })
 });
