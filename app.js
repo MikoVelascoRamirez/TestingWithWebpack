@@ -16,13 +16,28 @@ const addUser = () => {
 
   const newText = checkAndGenerate(inpName, inpAge);
 
-  if(!newText) console.log('Nel');
+  if(!newText) {
+    const error = generateErrorMessage('Entradas inválidas', 'errorMessage');
+    document.querySelector('#result').appendChild(error);
+    setTimeout(() => {
+      document.querySelector('#result').removeChild(error);
+    }, 3000)
+  }
   else {
     const newElement = createParragraph(newText);
     document.querySelector('#result').appendChild(newElement);
     form.reset();
   }
 };
+
+const generateErrorMessage = (message, className) => {
+  const errorMessage = document.createElement('p')
+  errorMessage.textContent = message;
+  errorMessage.classList.add(className);
+  errorMessage.id = 'errorMessage';
+
+  return errorMessage;
+}
 
 const createParragraph = text => {
   const parragraph = document.createElement('p');

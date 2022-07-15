@@ -1,7 +1,9 @@
 const puppeteer = require('puppeteer');
 const { validateInput, generateText, checkAndGenerate } = require('../src/util');
 
+
 describe("Tests suite for utilites", () => {
+
     it("1. Validating form", () => {
         const validation = validateInput("sasa", false, false);
         expect(validation).toBeTruthy();
@@ -39,11 +41,42 @@ describe("Tests suite for utilites", () => {
 
         //await page.waitForNavigation();
         //await page.screenshot({path: 'example.png'})
-        //await browser.close();
+        await browser.close();
     }, 100000)
 
     it("5. Throwing invalid input", () => {
         const validateInput = checkAndGenerate("12323", "dsasda");
         expect(validateInput).toBeFalsy();
     })
+
+    it("6. Throwing a error message", async () => {
+        //jest.useFakeTimers();
+
+        const browser = await puppeteer.launch(
+            { 
+                headless: true, 
+                slowMo: 80, 
+                args: ['--window-size=1280,1024']
+            });
+        const page = await browser.newPage();
+        await page.goto('http://localhost:8080');
+
+        await page.click('input#inpName')
+        await page.type('input#inpName', '12323');
+        await page.click('input#inpAge')
+        await page.type('input#inpAge', '32');
+        await page.click('input[type=submit]');
+
+        
+        const result = await page.$eval('#errorMessage', item => item.textContent);
+        
+        expect(result).toBe("Entradas inválidas");
+
+        await page.waitForTimeout(3000);
+
+        const result2 = await page.evaluate(() => document.querySelector('#errorMessage'));
+
+        expect(result2).toBeNull();
+        await browser.close();
+    }, 100000)
 });
